@@ -1,1 +1,52 @@
+#spring:
+#  # postgres start ------------------------------------------------------------------------------------------------------
+#  jpa:
+#    properties:
+#      jdbc.batch_size: 5000
+#      jdbc.batch_versioned_data: true
+#      order_inserts: true
+#      order_updates: true
+#      hibernate:
+#        format_sql: true
+#        jdbc.time_zone: UTC
+#        default_schema: ${DB_SCHEMA:local}
+#        query:
+#          fail_on_pagination_over_collection_fetch: true
+#    hibernate:
+#      ddl-auto: ${DB_DDL_AUTO:validate}
+#      naming:
+#        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+#        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl
+#    generate-ddl: false
+#    show-sql: true
+#    open-in-view: false
+#    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+#
+#  datasource:
+#    url: ${DB_CONNECTION:jdbc:postgresql://localhost:5432/mid_payment}
+#    username: ${DB_USERNAME}
+#    password: ${DB_PASSWORD}
+#    driver-class-name: ${DB_DRIVER_CLASS_NAME:org.postgresql.Driver}
+#    hikari:
+#      minimum-idle: 5
+#      max-lifetime: 580000
+#      maximum-pool-size: 10
+#      # change this
+#      pool-name: MidPaymentJpaHikariCP
+#      idle-timeout: 10000
+#      connection-timeout: 10000
+#      validation-timeout: 10000
+#      data-source-properties:
+#        stringtype: unspecified
+#  # postgres end --------------------------------------------------------------------------------------------------------
 
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tastezip
+    username: gonoo0731
+    password:
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: update
+      generate-ddl: true

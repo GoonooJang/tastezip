@@ -1,26 +1,33 @@
 package com.htbeyond.tastezip.service
 
 import com.htbeyond.tastezip.dto.PlaceDTO
-import com.htbeyond.tastezip.entity.Category
+import com.htbeyond.tastezip.entity.Place
+import com.htbeyond.tastezip.repository.PlaceRepository
+import org.springframework.data.repository.findByIdOrNull
+import org.springframework.stereotype.Service
 
-class PlaceServiceImpl : PlaceService {
-    override fun readWithParam(searchText: String, category: Category) {
-        TODO("Not yet implemented")
+@Service
+class PlaceServiceImpl(
+    private val placeRepository: PlaceRepository
+) : PlaceService {
+
+    override fun readAll(): List<PlaceDTO> = placeRepository.findAll().map { it.toPlaceDTO() }
+
+    override fun create(newPlace: PlaceDTO): PlaceDTO = placeRepository.save(newPlace.toPlace()).toPlaceDTO()
+
+
+    override fun update(revisedPlace: PlaceDTO): PlaceDTO {
+        //        val befPlace = placeRepository.findById(revisedPlace.id)
+
+        return placeRepository.save(revisedPlace.toPlace()).toPlaceDTO()
     }
 
-    override fun read(id: Long) {
-        TODO("Not yet implemented")
+    override fun delete(placeId: Long) {
+        placeRepository.deleteById(placeId)
     }
 
-    override fun create(newPlace: PlaceDTO) {
-        TODO("Not yet implemented")
-    }
+    override fun read(id: Long): Place? = placeRepository.findByIdOrNull(id)
 
-    override fun update(befPlace: PlaceDTO) {
-        TODO("Not yet implemented")
-    }
 
-    override fun delete(deletedList: List<PlaceDTO>) {
-        TODO("Not yet implemented")
-    }
 }
+

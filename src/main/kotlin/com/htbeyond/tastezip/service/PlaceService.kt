@@ -1,15 +1,16 @@
 package com.htbeyond.tastezip.service
 
 import com.htbeyond.tastezip.dto.PlaceDTO
-import com.htbeyond.tastezip.entity.Category
+import com.htbeyond.tastezip.entity.Place
 
 /**
  * @author Goonoo Jang
  */
 interface PlaceService {
-    fun readWithParam(searchText: String, category: Category)
-    fun read(id: Long)
-    fun create(newPlace: PlaceDTO)
-    fun update(befPlace: PlaceDTO)
-    fun delete(deletedList: List<PlaceDTO>)
+    fun readAll(): List<PlaceDTO>
+    fun read(id: Long): Place?
+    // todo: readWithFilter
+    fun create(newPlace: PlaceDTO): PlaceDTO
+    fun update(revisedPlace: PlaceDTO): PlaceDTO
+    fun delete(placeId: Long)
 }

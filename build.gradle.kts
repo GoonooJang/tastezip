@@ -24,6 +24,10 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     runtimeOnly("org.postgresql:postgresql")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    // Spring Boot 버전 업, 혹은 springmockk 버전 업할 시, 아래 링크를 참조하여 호환성을 보장할 수 있는 버전으로 업그레이드하세요!
+    // https://github.com/Ninja-Squad/springmockk#versions-compatibility
+//    testImplementation("com.ninja-squad:springmockk:3.1.1")
+    testImplementation("io.mockk:mockk:1.12.0")
 }
 
 tasks.withType<KotlinCompile> {

@@ -2,6 +2,7 @@ package com.htbeyond.tastezip.controller
 
 import com.htbeyond.tastezip.dto.PlaceDTO
 import com.htbeyond.tastezip.service.PlaceService
+import java.lang.Exception
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -16,7 +17,10 @@ class PlaceController(
     @GetMapping("/{placeId}")
     fun getPlaceById(
         @PathVariable placeId: Long
-    ): ResponseEntity<PlaceDTO> = ResponseEntity.ok(placeService.read(placeId)?.toPlaceDTO())
+    ): ResponseEntity<PlaceDTO> {
+        val findPlace = placeService.read(placeId)
+        return if(findPlace != null) ResponseEntity.ok(placeService.read(placeId)?.toPlaceDTO()) else throw Exception("there is no place which id is $placeId")
+    }
 
     @GetMapping("/")
     fun getTotalPlaceList(): ResponseEntity<List<PlaceDTO>> = ResponseEntity.ok(placeService.readAll())
@@ -25,7 +29,13 @@ class PlaceController(
     fun addPlace(
         @RequestBody place: PlaceDTO
     ): ResponseEntity<PlaceDTO> {
-        val createdPlace = placeService.create(place)
+        val createdPlace: PlaceDTO
+        try {
+            createdPlace = placeService.create(place)
+        } catch (e: Exception) {
+            throw e
+        }
+
         return ResponseEntity.ok(createdPlace)
     }
 

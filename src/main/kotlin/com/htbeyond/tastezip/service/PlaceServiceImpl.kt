@@ -13,7 +13,17 @@ class PlaceServiceImpl(
 
     override fun readAll(): List<PlaceDTO> = placeRepository.findAll().map { it.toPlaceDTO() }
 
-    override fun create(newPlace: PlaceDTO): PlaceDTO = placeRepository.save(newPlace.toPlace()).toPlaceDTO()
+    override fun create(newPlace: PlaceDTO): PlaceDTO {
+        if (placeRepository.existsByNameAndAddressAndCategory(
+                name = newPlace.name,
+                address = newPlace.address,
+                category = newPlace.category
+            )
+        ) throw Exception("That place already exists ")
+
+        return placeRepository.save(newPlace.toPlace()).toPlaceDTO()
+
+    }
 
 
     override fun update(revisedPlace: PlaceDTO): PlaceDTO {

@@ -8,7 +8,7 @@ import javax.persistence.*
  */
 
 enum class Category {
-    Korean, Japanese, Chinese, American, Mexican, Vietnamese,
+    Korean, Japanese, Chinese, American, Mexican, Vietnamese, Italian, Cafe, Pub, Etc
 }
 
 @Entity
@@ -20,7 +20,7 @@ data class Place(
     val address: String,
     @Enumerated(EnumType.STRING)
     val category: Category,
-    // id, 이름, 주소, 카테고리,
+    // todo: 어느나라 음식인지 애매하다면 비워두는걸로 설정
 ) {
     fun toPlaceDTO(): PlaceDTO {
         return PlaceDTO(

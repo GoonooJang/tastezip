@@ -41,10 +41,15 @@
 #  # postgres end --------------------------------------------------------------------------------------------------------
 
 spring:
+# todo: local DB 연동
+#  datasource:
+#    url: jdbc:postgresql://localhost:5432/tastezip
+#    username: gonoo0731
+#    password:
   datasource:
-    url: jdbc:postgresql://localhost:5432/tastezip
-    username: gonoo0731
-    password:
+    url: jdbc:postgresql://taste-zip-db-production.cpfqzhwelygz.ap-northeast-2.rds.amazonaws.com:5432/postgres
+    username: tastezip_admin
+    password: aktwlq123!
   jpa:
     generate-ddl: false
     hibernate:

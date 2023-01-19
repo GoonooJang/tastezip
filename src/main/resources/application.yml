@@ -4,6 +4,7 @@ spring:
     username: tastezip_admin
     password: aktwlq123
   jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
     generate-ddl: false
     hibernate:
       ddl-auto: update

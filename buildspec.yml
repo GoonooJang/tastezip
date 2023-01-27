@@ -36,13 +36,13 @@ phases:
       - printf '{"ImageURI":"%s"}' $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$BUILD_APP_VERSION > imageDetail.json
 artifacts:
   files:
-    - '**/build/libs/*.jar'
+#    - '**/build/libs/*.jar'
     - taskdef.json
     - appspec.yaml
     - imageDetail.json
-cache:
-  paths:
-    - '/root/.gradle/caches/**/*'
-    - '.gradle/**/*'
-    - '/root/.gradle/wrapper/**/*'
-    - 'gradle/**/*'
+#cache:
+#  paths:
+#    - '/root/.gradle/caches/**/*'
+#    - '.gradle/**/*'
+#    - '/root/.gradle/wrapper/**/*'
+#    - 'gradle/**/*'

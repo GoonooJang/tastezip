@@ -26,7 +26,7 @@
         }
       ],
       "mountPoints": [],
-      "memoryReservation": 1024,
+      "memoryReservation": 512,
       "volumesFrom": [],
       "image": "<IMAGE_NAME>",
       "name": "bg-place"

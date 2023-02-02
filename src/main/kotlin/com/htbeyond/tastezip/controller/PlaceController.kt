@@ -22,7 +22,7 @@ class PlaceController(
         return if(findPlace != null) ResponseEntity.ok(placeService.read(placeId)?.toPlaceDTO()) else throw Exception("there is no place which id is $placeId")
     }
 
-    @GetMapping("/")
+    @GetMapping("/all")
     fun getTotalPlaceList(): ResponseEntity<List<PlaceDTO>> = ResponseEntity.ok(placeService.readAll())
 
     @PostMapping("/")

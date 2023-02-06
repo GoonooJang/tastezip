@@ -9,10 +9,8 @@ phases:
       - echo Nothing to do in the pre_build phase...
   build:
     commands:
-      # 수정해야함!!!!!!!!!!!!!!!!
       - echo Logging in to Amazon ECR...
       - aws --version
-#      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
       - echo Build started on `date`
       - echo Building the Docker image...
@@ -20,29 +18,20 @@ phases:
       - echo Build App Version '$BUILD_APP_VERSION'
       - chmod +x gradlew
       - ./gradlew bootBuildImage --imageName $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$BUILD_APP_VERSION
-#      - echo Entered the build phase...
-#      - echo Build Starting on `date`
-#      - chmod +x ./gradlew
-#      - ./gradlew build
   post_build:
     commands:
-#      - echo Entered the post_build phase...
-#      - echo Build completed on `date`
-#      - echo $(basename ./build/libs/*.jar)
-#      - pwd
       - echo Build completed on `date`
       - echo Pushing the Docker image..
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$BUILD_APP_VERSION
       - printf '{"ImageURI":"%s"}' $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$BUILD_APP_VERSION > imageDetail.json
 artifacts:
   files:
-#    - '**/build/libs/*.jar'
     - taskdef.json
     - appspec.yaml
     - imageDetail.json
-#cache:
-#  paths:
-#    - '/root/.gradle/caches/**/*'
-#    - '.gradle/**/*'
-#    - '/root/.gradle/wrapper/**/*'
-#    - 'gradle/**/*'
+cache:
+  paths:
+    - '/root/.gradle/caches/**/*'
+    - '.gradle/**/*'
+    - '/root/.gradle/wrapper/**/*'
+    - 'gradle/**/*'
